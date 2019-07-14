@@ -26,8 +26,9 @@ class SignUp extends React.Component {
     }
     
     try {
-      const user = await auth.createUserWithEmailAndPassword(email, password);
+      const {user} = await auth.createUserWithEmailAndPassword(email, password);
       await createUserProfileDocument(user, {displayName});
+      
       this.setState({
         displayName: '',
         email: '',
@@ -39,9 +40,8 @@ class SignUp extends React.Component {
     }
   }
 
-  handleChange = event => {
+  handleChange = async event => {
     const {name, value} = event.target;
-    console.log(name, value);
     this.setState({[name]: value});
   }
 
